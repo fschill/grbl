@@ -20,7 +20,8 @@
 */
 
 #include "grbl.h"
-
+#include "tmc2130.h"
+#include "spi.h"
 
 // Declare system global variable structure
 system_t sys;
@@ -43,6 +44,8 @@ int main(void)
   settings_init(); // Load Grbl settings from EEPROM
   stepper_init();  // Configure stepper pins and interrupt timers
   system_init();   // Configure pinout pins and pin-change interrupt
+  spi_init();
+  tmc_init_all();
 
   memset(sys_position,0,sizeof(sys_position)); // Clear machine position.
   sei(); // Enable interrupts
