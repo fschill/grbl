@@ -49,11 +49,11 @@ uint8_t tmc_set_IHOLD_IRUN(volatile uint8_t *cs_port, uint8_t cs_pin, uint8_t ih
 void tmc_init(volatile uint8_t *cs_port, uint8_t cs_pin) {
 
     // initialisation example from datasheet
-    // Chopconf: TOFF=3, HSTRT=4, HEND=1, TBL=2, CHM=0 (spreadCycle)
-    tmc_write_REG(cs_port, cs_pin, TMC_REG_CHOPCONF, 0x000100C3);
+    // Chopconf: TOFF=3, HSTRT=4, HEND=1, TBL=2, CHM=0 (spreadCycle), mres=2 (64 microsteps)
+    tmc_write_REG(cs_port, cs_pin, TMC_REG_CHOPCONF, 0x000100C3 ); //| (uint32_t)2<<TMC_CHOPCONF_MRES
 
     // I hold, I run
-    tmc_set_IHOLD_IRUN(cs_port, cs_pin, 5, 8, 6);
+    tmc_set_IHOLD_IRUN(cs_port, cs_pin, 1, 2, 6);
     
     //  TPOWERDOWN=10: Delay before power down in stand still
     tmc_write_REG(cs_port, cs_pin, TMC_REG_TPOWERDOWN, 0x0000000A);
@@ -63,7 +63,7 @@ void tmc_init(volatile uint8_t *cs_port, uint8_t cs_pin) {
     tmc_write_REG(cs_port, cs_pin, TMC_REG_GCONF, 0x00000004);
 
     // TPWM_THRS=500 yields a switching velocity about 35000 = ca. 30RPM
-    tmc_write_REG(cs_port, cs_pin, TMC_REG_TPWMTHRS, 0x000001F4);
+    //tmc_write_REG(cs_port, cs_pin, TMC_REG_TPWMTHRS, 0x000001F4);
     
     // PWM_CONF: AUTO=1, 2/1024 Fclk, Switch amplitude limit=200, Grad=1
     tmc_write_REG(cs_port, cs_pin, TMC_REG_PWMCONF, 0x000401C8);

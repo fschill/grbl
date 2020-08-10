@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<CodeLite_Workspace Name="grbl" Database="">
+<CodeLite_Workspace Name="grbl" Database="" Version="10000">
   <Project Name="grbl" Path="grbl.project" Active="Yes"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="yes">

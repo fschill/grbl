@@ -7,7 +7,7 @@ void spi_init() {
   //  MISO as input  (PIN6)     
   //  SCK as output  (PIN7)
   //  CS  as output  (on SPI_CS)
-  DDRB=_BV(PB5) |_BV(PB7);
+  DDRB|=_BV(PB5) |_BV(PB3);
 
   
   // setup SPI as master, clock rate = f/128, sample on trailing edge
@@ -18,6 +18,7 @@ void spi_init() {
 
 // Write to the SPI bus (MOSI pin) and also receive (MISO pin)
 uint8_t spi_transfer(uint8_t data) {
+    
     SPDR = data;
     /*
      * The following NOP introduces a small delay that can prevent the wait
